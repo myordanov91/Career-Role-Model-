@@ -1,0 +1,683 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Career Role Levels</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --pine:#1D7B7F; --pine-d:#155e69; --pine-l:#e7f2f4;
+    --royal:#1360A0; --royal-d:#0f4f85; --royal-l:#e9f1f9;
+    --navy:#031C2B; --mint:#B0F7CF; --coral:#E66D62;
+    --ink:#1B2733; --muted:#5A6B7B; --line:#b9cace; --bg:#f4f6f7; --card:#ffffff;
+    --grey:#E6E6DC; --pink:#FBEBEC; --chip:#eef3f4;
+    --shadow:0 1px 2px rgba(3,28,43,.06),0 6px 18px rgba(3,28,43,.06);
+    --radius:10px;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{font-family:'Poppins',Arial,Helvetica,sans-serif;color:var(--ink);background:var(--bg);
+       -webkit-font-smoothing:antialiased;font-size:14px;line-height:1.45}
+  a{color:inherit;text-decoration:none}
+  h1,h2,h3{margin:0;font-weight:600;color:var(--navy)}
+
+  /* ===== Excel-style hero banner (royal blue), scrolls away ===== */
+  header.stx-hero{background:var(--royal);color:#fff;padding:32px 40px 34px}
+  .hero-inner{max-width:1180px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:28px}
+  .hero-title{font-size:40px;font-weight:700;color:#fff;margin:0;line-height:1.05}
+  .hero-sub{font-size:16.5px;color:#fff;opacity:.96;margin:0;max-width:920px;line-height:1.45}
+  .hero-logo{height:38px;width:auto;flex:0 0 auto;display:block}
+
+  /* ===== Toolbar sticky at very top (hero scrolls above it) ===== */
+  .stx-toolbar{position:sticky;top:0;z-index:35;background:#fff;border-bottom:1px solid var(--line);
+    padding:10px 18px;display:flex;flex-wrap:wrap;gap:10px 14px;align-items:center}
+  .stx-tabs{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+  .stx-tab{border:1px solid var(--line);background:#fff;color:var(--muted);border-radius:999px;padding:7px 16px;
+    font-size:12.5px;font-weight:500;cursor:pointer;transition:.12s;white-space:nowrap;display:inline-flex;align-items:center;gap:7px}
+  .stx-tab:hover{border-color:var(--royal);color:var(--royal)}
+  .stx-tab.active{background:var(--royal);border-color:var(--royal);color:#fff}
+  .stx-spacer{flex:1 1 auto}
+  .stx-search{display:flex;align-items:center;gap:7px;background:#fff;border:1px solid var(--line);border-radius:8px;padding:6px 10px;min-width:180px}
+  .stx-search input{border:0;outline:0;font-family:inherit;font-size:13px;width:100%;background:transparent;color:var(--ink)}
+  .stx-btn{border:1px solid var(--line);background:#fff;border-radius:8px;padding:6px 11px;font-family:inherit;font-size:12.5px;color:var(--muted);cursor:pointer}
+  .stx-btn:hover{color:var(--royal);border-color:var(--royal)}
+
+  .stx-canvas{padding:24px 26px 56px;overflow-x:auto}
+  .stx-wrap{max-width:1180px;margin:0 auto}
+
+  /* ===== Excel-style section heading (royal blue, bold) ===== */
+  .guide-h{color:var(--royal);font-size:20px;font-weight:700;margin:0 0 10px}
+  .guide-p{font-size:13.5px;line-height:1.65;margin:0;max-width:960px;color:var(--ink)}
+  .lede{color:var(--muted);font-size:13px;max-width:960px;margin:0 0 16px}
+  .block{margin:30px 0 0}
+  .block:first-child{margin-top:0}
+
+  /* ===== Data tables (Excel look: royal header band, colour-filled level column) ===== */
+  .tbl-wrap{border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow);background:#fff}
+  table.stx-tbl{border-collapse:collapse;width:100%;min-width:720px;font-size:12.5px}
+  table.stx-tbl th{background:var(--royal);color:#fff;font-weight:600;text-align:left;padding:11px 13px;font-size:11.5px;
+    letter-spacing:.3px;vertical-align:bottom}
+  table.stx-tbl td{padding:0;border-top:1px solid #e3e9ec;vertical-align:top}
+  table.stx-tbl td .pad{padding:10px 13px;display:block;color:var(--ink)}
+  td.lvlfill{white-space:nowrap}
+  td.lvlfill .pad{font-weight:700;font-size:12px}
+  td.lvlfill .gen{display:block;font-weight:500;font-size:10.5px;opacity:.9;margin-top:1px}
+  td.rolecell .pad{font-weight:600;color:var(--navy)}
+  .yn{display:inline-block;border-radius:5px;padding:1px 8px;font-size:10.5px;font-weight:600}
+  .yn.y{background:var(--royal-l);color:var(--royal-d)}
+  .yn.n{background:var(--grey);color:var(--muted)}
+  .yn.i{background:#fbeef0;color:var(--coral)}
+  .align{font-weight:600;color:var(--royal-d)}
+
+  /* ===== Track cards ===== */
+  .tracks{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px;margin-top:4px}
+  .track{border-radius:var(--radius);padding:15px 17px;color:#fff;box-shadow:var(--shadow)}
+  .track .tcode{font-size:12px;font-weight:700;letter-spacing:.5px;opacity:.95}
+  .track .tname{font-size:15px;font-weight:600;margin:1px 0 7px}
+  .track .tdesc{font-size:12px;line-height:1.5;opacity:.96}
+  .note{margin-top:12px;font-size:12px;color:var(--muted);background:var(--royal-l);border-left:3px solid var(--royal);
+    border-radius:6px;padding:9px 12px}
+
+  /* ===== Tab nav cards ===== */
+  .navgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px;margin-top:6px}
+  .stx-navcard{background:#fff;border:1px solid var(--line);border-top:4px solid var(--royal);border-radius:var(--radius);
+    padding:14px 16px;box-shadow:var(--shadow);cursor:pointer;transition:transform .12s,box-shadow .12s;text-align:left}
+  .stx-navcard:hover{transform:translateY(-2px);box-shadow:0 5px 14px rgba(3,28,43,.13);border-color:var(--royal)}
+  .stx-navcard .ttl{font-weight:600;font-size:14px;color:var(--royal-d)}
+  .stx-navcard .dsc{font-size:12px;color:var(--muted);margin:5px 0 8px}
+  .stx-navcard .open{color:var(--royal);font-weight:600;font-size:12px}
+
+  .dim{opacity:.22}
+  .hit{outline:2px solid var(--coral);outline-offset:-2px}
+  footer.stx-foot{padding:14px 26px 40px;color:var(--muted);font-size:11px;text-align:center}
+
+  @media print{.stx-toolbar{display:none!important}.stx-canvas{overflow:visible}body{background:#fff}}
+  @media (max-width:760px){
+    header.stx-hero{padding:24px 20px 26px}
+    .hero-inner{flex-direction:column;gap:14px}
+    .hero-title{font-size:27px}
+    .hero-sub{font-size:14px}
+    .hero-logo{height:30px;order:-1}
+    .guide-h{font-size:18px}
+  }
+</style>
+</head>
+<body>
+<header class="stx-hero">
+  <div class="hero-inner">
+    <div class="hero-text">
+      <h1 class="hero-title">Career Role Levels</h1>
+    </div>
+    <img class="hero-logo" alt="Sprintax" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB3aWR0aD0iMTkyMCIgaGVpZ2h0PSI0NjUuODkiIHZpZXdCb3g9IjAgMCAxOTIwIDQ2NS44OSI+DQogIDxkZWZzPg0KICAgIDxjbGlwUGF0aCBpZD0iY2xpcC1wYXRoIj4NCiAgICAgIDxyZWN0IGlkPSJSZWN0YW5nbGVfMiIgZGF0YS1uYW1lPSJSZWN0YW5nbGUgMiIgd2lkdGg9IjE5MjAiIGhlaWdodD0iNDY1Ljg5MSIgZmlsbD0iI2ZmZiIvPg0KICAgIDwvY2xpcFBhdGg+DQogICAgPGNsaXBQYXRoIGlkPSJjbGlwLVNwcmludGF4X0xvZ29fV2hpdGUiPg0KICAgICAgPHJlY3Qgd2lkdGg9IjE5MjAiIGhlaWdodD0iNDY1Ljg5Ii8+DQogICAgPC9jbGlwUGF0aD4NCiAgPC9kZWZzPg0KICA8ZyBpZD0iU3ByaW50YXhfTG9nb19XaGl0ZSIgY2xpcC1wYXRoPSJ1cmwoI2NsaXAtU3ByaW50YXhfTG9nb19XaGl0ZSkiPg0KICAgIDxnIGlkPSJHcm91cF8yIiBkYXRhLW5hbWU9Ikdyb3VwIDIiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDAgMCkiIHN0eWxlPSJpc29sYXRpb246IGlzb2xhdGUiPg0KICAgICAgPGcgaWQ9Ikdyb3VwXzEiIGRhdGEtbmFtZT0iR3JvdXAgMSIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMCAwKSIgY2xpcC1wYXRoPSJ1cmwoI2NsaXAtcGF0aCkiPg0KICAgICAgICA8cGF0aCBpZD0iUGF0aF8xIiBkYXRhLW5hbWU9IlBhdGggMSIgZD0iTTAsMjIwLjU0MWw0MC4wOS0yOC43MTNjOS44ODQsMjEuNzcxLDM0LjEzOSwzNC4xNTQsNTkuMzc3LDM0LjE1NCwxOS4zMSwwLDM1LjY0LTguOTA4LDM1LjY0LTI2LjIzNiwwLTE0LjM0OS04LjQxMy0yMi4yNjYtMzguMS0zMS42N0w3NS4yMiwxNjIuMTM5Yy00My41NDItMTEuODgtNjUuMzEzLTM4LjYtNjQuODMzLTc1LjczLDAtNDMuNTQyLDM5LjEwNy03MC43NTQsODguNTg1LTcwLjc1NCwzNy42MjEsMCw2Ni4zMTksMTQuMzQ5LDgzLjY0Nyw0Mi4wNTZMMTQ1LDg2LjQwOWMtMTEuMzc3LTE1LjM0LTI2LjcxNy0yNS4yMjMtNDcuMDE3LTI1LjIyMy0xNi4zMywwLTMzLjE0OCw3LjktMzMuMTQ4LDIzLjI0MiwwLDExLjg4Nyw1LjQ0MSwyMS43ODYsMjkuNjg5LDI5LjIwOGwyNS4yNDYsNy40MjJjNDMuNTQyLDEzLjM1OCw2OS4yODMsMzQuMTU0LDY5LjI4Myw3NS4yMiwwLDQ3LjUxMi0zOC42LDc2LjcxMy04OS41ODMsNzYuNzEzLTQ0LjAzOCwwLTgxLjY0NC0xNi44MjYtOTkuNDY3LTUyLjQ1IiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgwIDEwMS44MzIpIiBmaWxsPSIjZmZmIi8+DQogICAgICAgIDxwYXRoIGlkPSJQYXRoXzIiIGRhdGEtbmFtZT0iUGF0aCAyIiBkPSJNMzc1LjE3OSwxODguODYzVjk5LjI4N2MtMTMuMzc0LTE5LjI5NS0zNC4xNTQtMzQuMTU0LTY1LjgyNC0zNC4xNTQtNDMuNTU3LDAtNzMuNzQxLDM1LjYyNS03My43NDEsNzkuMTgyUzI2NS44LDIyMy41LDMwOS4zNTUsMjIzLjVjMzEuNjcsMCw1Mi40NS0xNC44NDQsNjUuODI0LTM0LjYzNG0tMTk1LjQ5LTQ0LjU0OGMwLTY5LjI4Myw0OS45ODktMTI4LjY2LDEyMy4yMzQtMTI4LjY2LDI5LjY4OCwwLDU0LjkzNCw5Ljg4NCw3Mi4yNTUsMjcuNzA3VjIwLjU4Nmg1NC40Mzl2MjQ3LjQ2SDM3NS4xNzlWMjQ0Ljc3M2MtMTcuMzIxLDE4LjMxOS00Mi41NjcsMjguMjE4LTcyLjI1NSwyOC4yMTgtNzMuMjQ2LDAtMTIzLjIzNC01OS4zOTItMTIzLjIzNC0xMjguNjc1IiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgxMTY4LjgyMSAxMDEuODMyKSIgZmlsbD0iI2ZmZiIvPg0KICAgICAgICA8cGF0aCBpZD0iUGF0aF8zIiBkYXRhLW5hbWU9IlBhdGggMyIgZD0iTTQxMy4wNzUsNjAuMDgyLDQ5Mi4wMzIsMTU4LjlINDI0LjU1bC02OC41MS04NS43NjRMMjg3LjUyMSwxNTguOUgyMTkuNTI5bDc4Ljk2NC05OC44MTRhNzMuMzMyLDczLjMzMiwwLDAsMSwxMTQuNTgyLDAiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDE0MjcuOTY4IDIxMS41NjYpIiBmaWxsPSIjZmZmIi8+DQogICAgICAgIDxwYXRoIGlkPSJQYXRoXzQiIGRhdGEtbmFtZT0iUGF0aCA0IiBkPSJNMzUzLjQ2OCwxMDYuNDI3LDI1Ni40MTcsOS4xMDcsMjE5Ljg4NSw0NS4yNDksMzQ5LjE1MywxNjkuMzMyaDguNjNMNDg3LjA0NCw0NS4yNDksNDUwLjUxMSw5LjEwN1oiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDE0MzAuMjgyIDU5LjIzNikiIGZpbGw9IiNmZmYiLz4NCiAgICAgICAgPHBhdGggaWQ9IlBhdGhfNSIgZGF0YS1uYW1lPSJQYXRoIDUiIGQ9Ik0yMzIuNjgsMzcuMDUxQTM2LjkxOSwzNi45MTksMCwwLDEsMjY5LjcxNiwwYzIwLjgxMSwwLDM3LjU2MSwxNi4yMzMsMzcuNTYxLDM3LjA1MSwwLDIwLjMtMTYuNzUsMzcuMDUxLTM3LjU2MSwzNy4wNTFBMzcuMjUyLDM3LjI1MiwwLDAsMSwyMzIuNjgsMzcuMDUxIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgxNTEzLjUxMSAwLjAwMSkiIGZpbGw9IiNmZmYiLz4NCiAgICAgICAgPHJlY3QgaWQ9IlJlY3RhbmdsZV8xIiBkYXRhLW5hbWU9IlJlY3RhbmdsZSAxIiB3aWR0aD0iNTQuNDM5IiBoZWlnaHQ9IjI0Ny40NiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoNzM1Ljg2NSAxMjIuNDE3KSIgZmlsbD0iI2ZmZiIvPg0KICAgICAgICA8cGF0aCBpZD0iUGF0aF82IiBkYXRhLW5hbWU9IlBhdGggNiIgZD0iTTk2LjcxMSwzNy4wNTFBMzYuOTE5LDM2LjkxOSwwLDAsMSwxMzMuNzQ3LDBjMjAuODEsMCwzNy41NjEsMTYuMjMzLDM3LjU2MSwzNy4wNTEsMCwyMC4zLTE2Ljc1LDM3LjA1MS0zNy41NjEsMzcuMDUxQTM3LjI1MiwzNy4yNTIsMCwwLDEsOTYuNzExLDM3LjA1MSIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoNjI5LjA3NSAwLjAwMSkiIGZpbGw9IiNmZmYiLz4NCiAgICAgICAgPHBhdGggaWQ9IlBhdGhfNyIgZGF0YS1uYW1lPSJQYXRoIDciIGQ9Ik0xMTUuMDY3LDIwLjU4Nmg1NC40MzlWNDYuODI5YzE3LjMyMS0yMS4yODMsNDMuMDU0LTMxLjE3NCw3Mi43NS0zMS4xNzQsNTguOSwwLDk3LDQxLjA2Niw5NywxMDQuNDEzVjI2OC4wNDVIMjg0LjgyM1YxMjguOTc2YzAtMzkuNTk1LTE5LjMxLTYzLjg0Mi01NC40MzktNjMuODQyLTI5LjcsMC01MC40ODQsMTUuODM1LTYwLjg3OCwzOS4xVjI2OC4wNDVIMTE1LjA2N1oiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDc0OC40NzUgMTAxLjgzMikiIGZpbGw9IiNmZmYiLz4NCiAgICAgICAgPHBhdGggaWQ9IlBhdGhfOCIgZGF0YS1uYW1lPSJQYXRoIDgiIGQ9Ik0yMTEuMDU5LDI0Ni4yODZWMTI3LjAwNkgxNDkuNjg2Vjc4LjVoNjEuMzczVjYuNzUxSDI2NS41Vjc4LjVoNzUuNzA3djQ4LjVIMjY1LjVWMjM3LjM2M2MwLDMxLjE4MiwxNS4zNCw0Mi4wODYsMzguNiw0Mi4wODYsMTUuMzQsMCwyNy43MDctNC40NjUsMzUuMTQ1LTguOTIzbDE2LjMyMyw0NS41MjNjLTExLjM3Nyw1LjQ1Ni0zMy4xNDgsMTIuMzgzLTU4LjM5NCwxMi4zODMtNDguMDA4LDAtODYuMTA5LTI2LjIzNi04Ni4xMDktODIuMTQ2IiB0cmFuc2Zvcm09InRyYW5zbGF0ZSg5NzMuNjYxIDQzLjkxNCkiIGZpbGw9IiNmZmYiLz4NCiAgICAgICAgPHBhdGggaWQ9IlBhdGhfOSIgZGF0YS1uYW1lPSJQYXRoIDkiIGQ9Ik03My41MjQsMTguNDUyaDU0LjQzOVY1MS42MTVjOS40LTE5LjI5NSwzNC42MzQtMzUuNjMyLDYyLjM1Ni0zNS42MzJhMTA3LjQzOSwxMDcuNDM5LDAsMCwxLDI1LjIzOCwyLjk2NEwyMDcuNjQsNzEuOTA4Yy00Ljk2MS0xLjk4MS0xMS44ODctMi45NzItMjEuMjkxLTIuOTcyLTIxLjc3MSwwLTQ3LjAwOSwxMi4zODMtNTguMzg2LDM4LjExNlYyNjUuOTEySDczLjUyNFoiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDQ3OC4yNTEgMTAzLjk2NSkiIGZpbGw9IiNmZmYiLz4NCiAgICAgICAgPHBhdGggaWQ9IlBhdGhfMTAiIGRhdGEtbmFtZT0iUGF0aCAxMCIgZD0iTTIyNy4xOTEsMTQ0LjMxNWMwLTQzLjU1Ny0zMC4xODQtNzkuMTgyLTczLjc0MS03OS4xODItMzIuMTY1LDAtNTIuOTQ2LDE0Ljg1OS02Ni4zLDM0LjE1NHY4OS41NzZjMTMuMzU4LDE5Ljc5LDM0LjEzOSwzNC42MzQsNjYuMywzNC42MzQsNDMuNTU3LDAsNzMuNzQxLTM1LjYyNSw3My43NDEtNzkuMTgyTTMyLjcwNywyMC41ODZIODcuMTQ2VjQzLjM2MkMxMDQuNDY3LDI1LjU0NiwxMjkuNywxNS42NTUsMTU5LjQsMTUuNjU1YzczLjcyNiwwLDEyMy43MTUsNTkuMzc3LDEyMy43MTUsMTI4LjY2UzIzMy4xMjcsMjcyLjk5MSwxNTkuNCwyNzIuOTkxYy0yOS43LDAtNTQuOTM0LTkuOS03Mi4yNTUtMjguMjE4VjM2NC4wNkgzMi43MDdaIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgyMTIuNzQ5IDEwMS44MzIpIiBmaWxsPSIjZmZmIi8+DQogICAgICA8L2c+DQogICAgPC9nPg0KICA8L2c+DQo8L3N2Zz4NCg==">
+  </div>
+</header>
+
+<div class="stx-toolbar">
+  <div class="stx-tabs" id="tabs"></div>
+</div>
+
+<div class="stx-canvas">
+  <div class="stx-wrap" id="view"></div>
+</div>
+
+<footer class="stx-foot" id="foot">Internal use only · Sprintax</footer>
+
+<script>
+const DATA = {
+  "colors": {
+    "IC0": "#F4F9FD",
+    "IC1": "#EAF2FA",
+    "IC2": "#BAD6EE",
+    "IC3": "#79ADD6",
+    "IC4": "#1E5A94",
+    "IC5": "#123F68",
+    "IC6": "#0C2A45",
+    "M1": "#BCE6D9",
+    "M2": "#8FD4C0",
+    "M3": "#5CBCA5",
+    "M4": "#2E9E88",
+    "M5": "#15705F",
+    "D6": "#0A3B36",
+    "EX": "#6B4E9E",
+    "CEO": "#3F2A66"
+  },
+  "guide": {
+    "title": "SPRINTAX  ·  CAREER FRAMEWORK",
+    "tagline": "Sprintax Job Level Framework",
+    "purpose": "A clear, shared picture of every level in the Sprintax Job Level Framework: what each level is accountable for, the scope and autonomy expected, and how the levels relate across the Individual Contributor, Management and Executive tracks. Use it as the common spine for mapping existing Sprintax roles to a level, and the same reference for calibration, levelling and promotion decisions across every function.",
+    "ladder": [
+      {
+        "level": "CEO – Chief Executive",
+        "role": "CEO",
+        "oneline": "Chief Executive"
+      },
+      {
+        "level": "EX – Executive",
+        "role": "Executive (VP)",
+        "oneline": "Company leadership across functions"
+      },
+      {
+        "level": "D6 – Director",
+        "role": "Director",
+        "oneline": "Owns a whole function (Operations, Tech, Marketing or Commercial)"
+      },
+      {
+        "level": "M5 – Head of Department",
+        "role": "Head of Dept",
+        "oneline": "Runs a whole department — all its teams and managers"
+      },
+      {
+        "level": "M4 – Senior Manager",
+        "role": "Senior Manager",
+        "oneline": "Manages several teams, typically through team leaders and managers"
+      },
+      {
+        "level": "M3 – Manager",
+        "role": "Manager",
+        "oneline": "Formally manages a team — accountable for delivery and for hiring, performance and development"
+      },
+      {
+        "level": "M2 – Group Leader",
+        "role": "Group Leader",
+        "oneline": "Leads a large team, or a group of small teams — coordinating delivery across more people"
+      },
+      {
+        "level": "M1 – Team Leader",
+        "role": "Team Leader",
+        "oneline": "Leads a small team day-to-day — coordinates work and supports the team"
+      },
+      {
+        "level": "IC6 – Thought Leader",
+        "role": "Distinguished",
+        "oneline": "Shapes direction at company and industry level"
+      },
+      {
+        "level": "IC5 – Master",
+        "role": "Principal",
+        "oneline": "Drives outcomes across teams or functions"
+      },
+      {
+        "level": "IC4 – Subject Matter Expert",
+        "role": "Lead / Staff",
+        "oneline": "Recognised depth in a domain"
+      },
+      {
+        "level": "IC3 – Experienced Professional",
+        "role": "Senior",
+        "oneline": "Senior individual contributor"
+      },
+      {
+        "level": "IC2 – Established Professional",
+        "role": "Professional",
+        "oneline": "Fully competent in the role"
+      },
+      {
+        "level": "IC1 – Entry-Level Professional",
+        "role": "Junior",
+        "oneline": "Executes well-defined tasks with regular guidance"
+      },
+      {
+        "level": "IC0 – Intern / Trainee",
+        "role": "Intern",
+        "oneline": "Temporary, learning-focused placement"
+      }
+    ],
+    "tracks": [
+      {
+        "code": "IC",
+        "name": "",
+        "desc": "Deliver and own the work directly. Impact grows from single tasks → complex cases → setting standards and shaping direction, with no formal line management."
+      },
+      {
+        "code": "M–D",
+        "name": "",
+        "desc": "Formal people management, scaling from a small team (M1) up through departments (M4–M5) to a whole function (D6 – Director)."
+      },
+      {
+        "code": "EX",
+        "name": "",
+        "desc": "Company leadership across functions (EX), up to CEO."
+      }
+    ],
+    "tracks_note": "•  Within each track, darker = more senior.   •  The three tracks run in parallel — use the “Aligns With” column on the Overview tab to see roughly equivalent levels across tracks when mapping a role.",
+    "tabs": [
+      {
+        "name": "Overview",
+        "desc": "The whole ladder on one page — role, positioning, scope of influence and how you progress from each level."
+      },
+      {
+        "name": "Level Requirements",
+        "desc": "For every level: autonomy, complexity, quality, ownership, people leadership, business understanding and the evidence to progress."
+      }
+    ],
+    "version": "Version Draft 1.0 · Oct 2026  ·  For internal use only  ·  Sprintax"
+  },
+  "overview": {
+    "title": "Sprintax Job Level Framework — Overview",
+    "subtitle": "The whole ladder at a glance. Blue = Individual Contributor, green = Management, purple = Executive; darker = more senior. Map each Sprintax role to one band.",
+    "headers": [
+      "Career Role Level",
+      "Generic Title",
+      "Positioning",
+      "Scope of Influence",
+      "Formal People Management",
+      "Aligns With"
+    ],
+    "rows": [
+      [
+        "IC0 – Intern / Trainee",
+        "Intern",
+        "Temporary, learning-focused placement. Works on scoped tasks under close supervision to build foundational skills; not expected to deliver independently.",
+        "Own learning tasks",
+        "No",
+        "Entry"
+      ],
+      [
+        "IC1 – Entry-Level Professional",
+        "Junior",
+        "Executes well-defined tasks with regular guidance. Building core craft and following established processes.",
+        "Own tasks",
+        "No",
+        "—"
+      ],
+      [
+        "IC2 – Established Professional",
+        "Professional",
+        "Fully competent in the role; delivers standard work independently, end to end.",
+        "Own workload / small projects",
+        "No",
+        "—"
+      ],
+      [
+        "IC3 – Experienced Professional",
+        "Senior",
+        "Senior individual contributor. Owns complex or ambiguous work, sets the approach, and mentors less-experienced colleagues.",
+        "Projects / team outcomes",
+        "No",
+        "M1"
+      ],
+      [
+        "IC4 – Subject Matter Expert",
+        "Lead / Staff",
+        "Recognised depth in a domain; sets professional standards and is the reference point others consult. Also acts as an informal supervisor — distributes work, guides the team's output and contributes to evaluations — without formal line management.",
+        "Cross-team domain",
+        "Informal",
+        "M2"
+      ],
+      [
+        "IC5 – Master",
+        "Principal",
+        "Drives outcomes across teams or functions. Tackles the hardest problems and shapes direction in the discipline.",
+        "Multi-team / function",
+        "No",
+        "M3"
+      ],
+      [
+        "IC6 – Thought Leader",
+        "Distinguished",
+        "Shapes direction at company and industry level. Rare, strategic expertise whose influence extends beyond Sprintax.",
+        "Company / industry",
+        "No",
+        "M4"
+      ],
+      [
+        "M1 – Team Leader",
+        "Team Leader",
+        "Leads a small team day-to-day — coordinates work and supports the team. The first step into people leadership.",
+        "A small team",
+        "Yes",
+        "IC3"
+      ],
+      [
+        "M2 – Group Leader",
+        "Group Leader",
+        "Leads a large team, or a group of small teams — coordinating delivery across more people. A step up from Team Leader, still hands-on and without full line-management authority.",
+        "A large team / group of teams",
+        "Yes",
+        "IC4"
+      ],
+      [
+        "M3 – Manager",
+        "Manager",
+        "Formally manages a team — accountable for delivery and for hiring, performance and development.",
+        "A team",
+        "Yes",
+        "IC5"
+      ],
+      [
+        "M4 – Senior Manager",
+        "Senior Manager",
+        "Manages several teams, typically through team leaders and managers. Owns their combined outcomes.",
+        "Several teams",
+        "Yes",
+        "IC6"
+      ],
+      [
+        "M5 – Head of Department",
+        "Head of Dept",
+        "Runs a whole department — all its teams and managers. Owns the department's plan, outcomes and resourcing.",
+        "A department",
+        "Yes",
+        "IC6+"
+      ],
+      [
+        "D6 – Director",
+        "Director",
+        "Owns a whole function (Operations, Tech, Marketing or Commercial). Sets the function's strategy and standards; accountable for its results.",
+        "A function",
+        "Yes",
+        "—"
+      ],
+      [
+        "EX – Executive",
+        "Executive (VP)",
+        "Company leadership across functions. Leads several functions / a division and turns company strategy into direction and investment.",
+        "Across functions / division",
+        "Yes",
+        "—"
+      ],
+      [
+        "CEO – Chief Executive",
+        "CEO",
+        "Chief Executive. Sets overall company strategy and is accountable for company-wide performance.",
+        "Company-wide",
+        "Yes",
+        "Top"
+      ]
+    ]
+  },
+  "levelreq": {
+    "title": "Sprintax Job Level Framework — Level Requirements",
+    "subtitle": "The dimensions to assess a role against when placing it on the ladder. Match a Sprintax role to the band whose row best describes it.",
+    "headers": [
+      "Role Level",
+      "Generic Title",
+      "Autonomy & Decision-Making",
+      "Scope & Complexity",
+      "People Leadership",
+      "Business / Stakeholder Impact",
+      "How to Map a Role Here"
+    ],
+    "rows": [
+      [
+        "IC0 – Intern / Trainee",
+        "Intern",
+        "Works under close, continuous supervision.",
+        "Small, well-scoped learning tasks.",
+        "None.",
+        "Minimal; internal learning only.",
+        "Fixed-term trainee / placement roles with no independent delivery expectation."
+      ],
+      [
+        "IC1 – Entry-Level Professional",
+        "Junior",
+        "Regular guidance; follows defined process.",
+        "Defined tasks within own area.",
+        "None.",
+        "Limited; supports others' deliverables.",
+        "Entry / junior roles (roughly 0–2 yrs) still learning the craft."
+      ],
+      [
+        "IC2 – Established Professional",
+        "Professional",
+        "Independent on standard work; escalates edge cases.",
+        "Owns own workload end to end; routine ambiguity.",
+        "None (may guide interns).",
+        "Delivers own contribution reliably.",
+        "Fully-ramped individual contributors doing core role work."
+      ],
+      [
+        "IC3 – Experienced Professional",
+        "Senior",
+        "Self-directed on complex / ambiguous work.",
+        "Projects and team-level outcomes; sets the approach.",
+        "Informal mentoring; no direct reports.",
+        "Influences team priorities; trusted on judgement.",
+        "Senior ICs who own hard problems and uplift peers."
+      ],
+      [
+        "IC4 – Subject Matter Expert",
+        "Lead / Staff",
+        "Sets standards within a domain.",
+        "Cross-team impact within a domain.",
+        "Informal supervision — work distribution, guidance and input to evaluations; no direct reports.",
+        "Shapes decisions in area of expertise.",
+        "Deep experts who also informally supervise (distribute work, evaluate) without formal reports."
+      ],
+      [
+        "IC5 – Master",
+        "Principal",
+        "Defines the approach for a function or discipline.",
+        "Multi-team / function-wide; the hardest problems.",
+        "None formal; leads through influence.",
+        "Drives function-level outcomes and strategy input.",
+        "Principal-level ICs with function-wide impact."
+      ],
+      [
+        "IC6 – Thought Leader",
+        "Distinguished",
+        "Sets direction for the discipline at company level.",
+        "Company / industry scope.",
+        "None formal; organisation-wide and external influence.",
+        "Shapes company direction; external reputation.",
+        "Rare distinguished experts; company- and industry-level influence."
+      ],
+      [
+        "M1 – Team Leader",
+        "Team Leader",
+        "Leads a small team within agreed goals; still hands-on.",
+        "A small team.",
+        "Coordinates and supports the team; first-line leadership.",
+        "Accountable for the team's delivery.",
+        "First step into leadership — leading a small team."
+      ],
+      [
+        "M2 – Group Leader",
+        "Group Leader",
+        "Leads a large team or a group of small teams.",
+        "A large team / a group of small teams.",
+        "Leads a larger group day-to-day; may guide team leaders. Coordinates rather than formally manages.",
+        "Accountable for the group's delivery.",
+        "Leaders of a large team or a group of small teams, below formal Manager."
+      ],
+      [
+        "M3 – Manager",
+        "Manager",
+        "Formally manages a team.",
+        "A team.",
+        "Direct reports; hiring, performance, development.",
+        "Accountable for team outcomes.",
+        "Formal managers with full people-management authority."
+      ],
+      [
+        "M4 – Senior Manager",
+        "Senior Manager",
+        "Sets priorities across several teams.",
+        "Several teams.",
+        "Manages managers and team leaders.",
+        "Accountable for the combined teams' outcomes.",
+        "Senior managers running several teams through others."
+      ],
+      [
+        "M5 – Head of Department",
+        "Head of Dept",
+        "Owns a department; sets its plan and priorities.",
+        "A whole department.",
+        "Leads managers and senior managers.",
+        "Accountable for department outcomes and resourcing.",
+        "Heads of department owning a whole department."
+      ],
+      [
+        "D6 – Director",
+        "Director",
+        "Sets function strategy within company goals.",
+        "A whole function (Operations, Tech, Marketing, Commercial).",
+        "Leads a leadership team of department heads.",
+        "Accountable for the function's results and plan.",
+        "Directors owning an entire function."
+      ],
+      [
+        "EX – Executive",
+        "Executive (VP)",
+        "Translates company strategy into cross-function direction.",
+        "Several functions / a division.",
+        "Leads directors.",
+        "Owns division outcomes / major P&L.",
+        "Executives leading several functions across the company."
+      ],
+      [
+        "CEO – Chief Executive",
+        "CEO",
+        "Sets company strategy.",
+        "Company-wide.",
+        "Leads the executive team.",
+        "Accountable for company performance.",
+        "The CEO."
+      ]
+    ]
+  }
+};
+
+const TABS = [
+  {id:'guide',    label:'Framework Guide'},
+  {id:'overview', label:'Overview'},
+  {id:'levelreq', label:'Level Requirements'},
+];
+let active = 'guide';
+
+const esc = s => (s==null?'':String(s)).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const codeOf = lvl => (lvl||'').split('–')[0].split('-')[0].trim();
+const colorOf = lvl => DATA.colors[codeOf(lvl)] || '#eef3f4';
+
+function textOn(hex){
+  const h = hex.replace('#','');
+  const r=parseInt(h.substr(0,2),16), g=parseInt(h.substr(2,2),16), b=parseInt(h.substr(4,2),16);
+  const L = (0.299*r + 0.587*g + 0.114*b)/255;
+  return L > 0.6 ? '#1B2733' : '#ffffff';
+}
+function yn(v){
+  const t=(v||'').toLowerCase();
+  if(t.startsWith('y')) return `<span class="yn y">Yes</span>`;
+  if(t.startsWith('inf')||t==='informal') return `<span class="yn i">Informal</span>`;
+  if(t.startsWith('n')) return `<span class="yn n">No</span>`;
+  return esc(v);
+}
+
+/* ---------- Tab 1: Framework Guide (matches the Excel cover) ---------- */
+function renderGuide(){
+  const g = DATA.guide;
+
+  const ladderRows = g.ladder.map(r=>{
+    const bg=colorOf(r.level), fg=textOn(bg);
+    return `<tr data-search="${esc((r.level+' '+r.role+' '+r.oneline).toLowerCase())}">
+      <td class="lvlfill" style="background:${bg}"><span class="pad" style="color:${fg}">${esc(r.level)}</span></td>
+      <td class="rolecell"><span class="pad">${esc(r.role)}</span></td>
+      <td><span class="pad">${esc(r.oneline)}</span></td>
+    </tr>`;
+  }).join('');
+
+  const trackBG = {'IC':DATA.colors.IC4||'#1E5A94','M–D':DATA.colors.M4||'#2E9E88','EX':DATA.colors.EX||'#6B4E9E'};
+  const tracks = g.tracks.map(t=>`
+    <div class="track" style="background:${trackBG[t.code]||'#1360A0'}">
+      <div class="tcode">${esc(t.code)}</div>
+      <div class="tname">${esc(t.name)}</div>
+      <div class="tdesc">${esc(t.desc)}</div>
+    </div>`).join('');
+
+  const tabcards = g.tabs.map((t,i)=>{
+    const target = i===0 ? 'overview' : 'levelreq';
+    return `<div class="stx-navcard" onclick="setTab('${target}')">
+      <div class="ttl">${esc(t.name)}</div>
+      <div class="dsc">${esc(t.desc)}</div>
+      <div class="open">Open ↗</div></div>`;
+  }).join('');
+
+  return `
+    <div class="block">
+      <h2 class="guide-h">What this framework is for</h2>
+      <p class="guide-p">${esc(g.purpose)}</p>
+    </div>
+    <div class="block">
+      <h2 class="guide-h">The career ladder at a glance</h2>
+      <div class="tbl-wrap"><table class="stx-tbl">
+        <thead><tr><th style="min-width:200px">Level</th><th style="min-width:130px">Role</th><th>In one line</th></tr></thead>
+        <tbody>${ladderRows}</tbody>
+      </table></div>
+    </div>
+    <div class="block">
+      <h2 class="guide-h">Reading the level codes</h2>
+      <div class="tracks">${tracks}</div>
+    </div>
+    <div class="block">
+      <h2 class="guide-h">What's in each tab</h2>
+      <div class="navgrid">${tabcards}</div>
+    </div>`;
+}
+
+/* ---------- Tabs 2 & 3: tables ---------- */
+function renderTable(obj){
+  const rows = obj.rows.map(r=>{
+    const lvl=r[0], gen=r[1];
+    const bg=colorOf(lvl), fg=textOn(bg);
+    const searchKey = r.join(' ').toLowerCase();
+    const cells = r.map((c,i)=>{
+      if(i===0) return `<td class="lvlfill" style="background:${bg}">
+          <span class="pad" style="color:${fg}">${esc(lvl)}<span class="gen">${esc(gen)}</span></span></td>`;
+      if(i===1) return '';
+      if(/^(Formal People Management|People Leadership)$/.test(obj.headers[i]) && /^(yes|no|informal)/i.test(c))
+        return `<td><span class="pad">${yn(c)}</span></td>`;
+      if(obj.headers[i]==='Aligns With') return `<td><span class="pad align">${esc(c)}</span></td>`;
+      return `<td><span class="pad">${esc(c)}</span></td>`;
+    }).join('');
+    return `<tr data-search="${esc(searchKey)}">${cells}</tr>`;
+  }).join('');
+  const headList = obj.headers.map((h,i)=> i===1 ? '' :
+    (i===0?`<th style="min-width:200px">${esc(h)} · <span style="opacity:.75;font-weight:400">Generic title</span></th>`
+          :`<th>${esc(h)}</th>`)).join('');
+  return `
+    <div class="block">
+      <h2 class="guide-h">${esc(obj.title.split('—').slice(-1)[0].trim())}</h2>
+      <p class="lede">${esc(obj.subtitle)}</p>
+      <div class="tbl-wrap"><table class="stx-tbl"><thead><tr>${headList}</tr></thead><tbody>${rows}</tbody></table></div>
+    </div>`;
+}
+
+function render(){
+  const view=document.getElementById('view');
+  if(active==='guide') view.innerHTML=renderGuide();
+  else if(active==='overview') view.innerHTML=renderTable(DATA.overview);
+  else view.innerHTML=renderTable(DATA.levelreq);
+  document.querySelectorAll('.stx-tab').forEach(t=>t.classList.toggle('active', t.dataset.id===active));
+  applySearch();
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+function setTab(id){ active=id; render(); }
+window.setTab=setTab;
+
+function buildTabs(){
+  document.getElementById('tabs').innerHTML = TABS.map(t=>
+    `<button class="stx-tab" data-id="${t.id}" onclick="setTab('${t.id}')">${esc(t.label)}</button>`).join('');
+}
+
+function applySearch(){
+  const qel=document.getElementById('q');
+  if(!qel) return;
+  const q=(qel.value||'').trim().toLowerCase();
+  document.querySelectorAll('#view [data-search]').forEach(el=>{
+    const hit=!q||(el.dataset.search||'').includes(q);
+    el.classList.toggle('hit', !!q&&hit);
+    el.classList.toggle('dim', !!q&&!hit);
+  });
+}
+document.getElementById('q')?.addEventListener('input',applySearch);
+document.getElementById('printBtn')?.addEventListener('click',()=>window.print());
+document.getElementById('foot').textContent = 'For internal use only';
+
+buildTabs();
+render();
+</script>
+</body>
+</html>
