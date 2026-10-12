@@ -152,32 +152,32 @@ const DATA = {
       {
         "level": "CEO – Chief Executive",
         "role": "CEO",
-        "oneline": "Chief Executive"
+        "oneline": "Holds ultimate responsibility for the organisation's vision, strategy and performance"
       },
       {
         "level": "EX – Executive",
         "role": "Executive (VP)",
-        "oneline": "Company leadership across functions"
+        "oneline": "Company-wide executive accountable for their function's strategy and performance"
       },
       {
         "level": "D6 – Director",
         "role": "Director",
-        "oneline": "Owns a whole function (Operations, Tech, Marketing or Commercial)"
+        "oneline": "Executive owner of a major function or business line — sets long-term direction and steers investment"
       },
       {
         "level": "D5 – Head of Department",
         "role": "Head of Dept",
-        "oneline": "Runs a whole department — all its teams and managers"
+        "oneline": "Overall leader of a department, region or business unit — owns its strategy, budgets and results"
       },
       {
         "level": "M4 – Senior Manager",
         "role": "Senior Manager",
-        "oneline": "Senior Manager leading several teams through managers and team leaders"
+        "oneline": "Leads a larger team, sub-department or region — manages multiple team leaders and drives change"
       },
       {
         "level": "M3 – Manager",
         "role": "Manager",
-        "oneline": "Formally manages a team; may lead several teams through managers and team leaders"
+        "oneline": "Manages one or more teams or a functional area — owns operational delivery and resource planning"
       },
       {
         "level": "M2 – Group Leader",
@@ -187,42 +187,42 @@ const DATA = {
       {
         "level": "M1 – Team Leader",
         "role": "Team Leader",
-        "oneline": "Leads a team day-to-day, from small up to large — coordinates work and supports the team"
+        "oneline": "First-line manager of a team, from small to large — plans work, coaches the team and owns day-to-day delivery"
       },
       {
         "level": "IC6 – Thought Leader",
         "role": "Distinguished",
-        "oneline": "Shapes direction at company and industry level"
+        "oneline": "Top expert, recognised inside and outside the company — sets direction where there is no precedent"
       },
       {
         "level": "IC5 – Master",
         "role": "Principal",
-        "oneline": "Drives outcomes across teams or functions"
+        "oneline": "Master of the discipline — solves unscoped problems and turns strategy into cross-team plans"
       },
       {
         "level": "IC4 – Subject Matter Expert",
         "role": "Lead / Staff",
-        "oneline": "Recognised depth in a domain"
+        "oneline": "Recognised domain expert — leads large work, sets standards, influences beyond their team"
       },
       {
         "level": "IC3 – Experienced Professional",
         "role": "Senior",
-        "oneline": "Senior individual contributor"
+        "oneline": "Leads complex work end to end; weighs trade-offs and mentors junior and mid-level colleagues"
       },
       {
         "level": "IC2 – Established Professional",
         "role": "Professional",
-        "oneline": "Fully competent in the role"
+        "oneline": "Owns work within the existing structure independently; plans, tests, reviews, supports juniors"
       },
       {
         "level": "IC1 – Entry-Level Professional",
         "role": "Junior",
-        "oneline": "Executes well-defined tasks with regular guidance"
+        "oneline": "Delivers well-defined tasks with guidance — on time, to quality, tests own work"
       },
       {
         "level": "IC0 – Intern / Trainee",
         "role": "Intern",
-        "oneline": "Temporary, learning-focused placement"
+        "oneline": "Learns the role and company, performing clearly defined tasks under close supervision"
       }
     ],
     "tracks": [
@@ -270,7 +270,7 @@ const DATA = {
       [
         "IC0 – Intern / Trainee",
         "Intern",
-        "Temporary, learning-focused placement. Works on scoped tasks under close supervision to build foundational skills; not expected to deliver independently.",
+        "Learns the basics of the role and company, performing clearly defined tasks under close supervision while developing fundamental skills and knowledge.",
         "Own learning tasks",
         "No",
         "Entry"
@@ -278,7 +278,7 @@ const DATA = {
       [
         "IC1 – Entry-Level Professional",
         "Junior",
-        "Executes well-defined tasks with regular guidance. Building core craft and following established processes.",
+        "Works on well-defined tasks and small changes from a clear brief, with regular guidance. Knows the team's basics, tools and standards; delivers on time and to the agreed quality, tests their own work, and asks questions early rather than stalling.",
         "Own tasks",
         "No",
         "—"
@@ -286,7 +286,7 @@ const DATA = {
       [
         "IC2 – Established Professional",
         "Professional",
-        "Fully competent in the role; delivers standard work independently, end to end.",
+        "Delivers standard work independently and owns pieces of work within the existing structure without close supervision. Plans, estimates and breaks down their own work, delivers predictably, documents and quality-checks what they build, and reviews others' work while supporting juniors.",
         "Own workload / small projects",
         "No",
         "—"
@@ -294,7 +294,7 @@ const DATA = {
       [
         "IC3 – Experienced Professional",
         "Senior",
-        "Senior individual contributor. Owns complex or ambiguous work, sets the approach, and mentors less-experienced colleagues.",
+        "A strong senior professional who leads complex work end to end under limited supervision, including improving existing systems and processes. Weighs trade-offs between scope, time and quality and recommends one, manages dependencies with other teams, and mentors junior and mid-level colleagues.",
         "Projects / team outcomes",
         "No",
         "M1"
@@ -302,7 +302,7 @@ const DATA = {
       [
         "IC4 – Subject Matter Expert",
         "Lead / Staff",
-        "Recognised depth in a domain; sets professional standards and is the reference point others consult. Also acts as an informal supervisor — distributes work, guides the team's output and contributes to evaluations — without formal line management.",
+        "Recognised expert in their domain whom others seek out for answers. Leads large pieces of work and shapes the design of their area, sets quality and review expectations, breaks down big initiatives and delegates parts to others, and influences decisions beyond their own team.",
         "Cross-team domain",
         "Informal",
         "M2"
@@ -310,7 +310,7 @@ const DATA = {
       [
         "IC5 – Master",
         "Principal",
-        "Drives outcomes across teams or functions. Tackles the hardest problems and shapes direction in the discipline.",
+        "A recognised master of the discipline with deep knowledge across several areas or systems. Solves undefined, complex problems that nobody has yet scoped, turns strategic goals into plans delivered across teams, sets standards used beyond their own team, and develops other senior experts.",
         "Multi-team / function",
         "No",
         "M3"
@@ -318,7 +318,7 @@ const DATA = {
       [
         "IC6 – Thought Leader",
         "Distinguished",
-        "Shapes direction at company and industry level. Rare, strategic expertise whose influence extends beyond Sprintax.",
+        "Top-level expert with mastery across multiple areas, recognised inside and outside the company. Sets direction where there is no precedent, drives company-wide impact, shapes how the discipline works across the organisation, and recommends strategy to leadership.",
         "Company / industry",
         "No",
         "M4"
@@ -326,7 +326,7 @@ const DATA = {
       [
         "M1 – Team Leader",
         "Team Leader",
-        "Leads a team day-to-day, anywhere from a small to a large team — coordinates work and supports the team. The first step into people leadership.",
+        "First-line people manager responsible for a team's results — from a small team up to a large one. Plans and allocates work, coaches team members, manages performance and engagement, and ensures delivery of day-to-day tasks and objectives.",
         "A small to large team",
         "Yes",
         "IC3"
@@ -342,39 +342,39 @@ const DATA = {
       [
         "M3 – Manager",
         "Manager",
-        "Formally manages a team — accountable for delivery and for hiring, performance and development. May lead several teams, including managers and team leaders, where the scope requires it.",
-        "A team; may lead several teams through managers / team leaders",
+        "Manages one or more teams or a functional area. Accountable for operational delivery, resource planning and improvement initiatives, leading team leaders, supervisors, senior specialists and other high-level ICs.",
+        "One or more teams / a functional area",
         "Yes",
         "IC5"
       ],
       [
         "M4 – Senior Manager",
         "Senior Manager",
-        "Senior Manager leading several teams through managers and team leaders. Owns their combined outcomes.",
-        "Several teams",
+        "Leads a larger team, sub-department or region. Defines mid-term objectives, manages multiple team leaders, drives change and cross-functional collaboration, and contributes to functional strategy and budgeting.",
+        "A larger team / sub-department / region",
         "Yes",
         "IC6"
       ],
       [
         "D5 – Head of Department",
         "Head of Dept",
-        "Runs a whole department — all its teams and managers. Owns the department's plan, outcomes and resourcing.",
-        "A department",
+        "Overall leader of a department, region or business unit. Sets and executes functional strategy, owns budgets and key results, builds leadership capability in the area, and is part of the extended senior leadership group.",
+        "A department / region / business unit",
         "Yes",
         "IC6+"
       ],
       [
         "D6 – Director",
         "Director",
-        "Owns a whole function (Operations, Tech, Marketing or Commercial). Sets the function's strategy and standards; accountable for its results.",
-        "A function",
+        "Executive owner of a major function or business line. Sets long-term direction, ensures delivery of strategic objectives, steers investment and organisation design, and is an active member of the senior leadership team.",
+        "A function / business line",
         "Yes",
         "—"
       ],
       [
         "EX – Executive",
         "Executive (VP)",
-        "Company leadership across functions. Leads several functions / a division and turns company strategy into direction and investment.",
+        "Company-wide executive accountable for the strategy and performance of their function. Shapes overall corporate direction, makes enterprise-level decisions, and is accountable to the CEO and/or Board.",
         "Across functions / division",
         "Yes",
         "—"
@@ -382,7 +382,7 @@ const DATA = {
       [
         "CEO – Chief Executive",
         "CEO",
-        "Chief Executive. Sets overall company strategy and is accountable for company-wide performance.",
+        "Holds ultimate responsibility for the organisation's vision, strategy, culture and performance. Leads the executive team, represents the company to the Board, shareholders and key external stakeholders, and steers long-term sustainable growth.",
         "Company-wide",
         "Yes",
         "Top"
@@ -406,72 +406,72 @@ const DATA = {
         "IC0 – Intern / Trainee",
         "Intern",
         "Works under close, continuous supervision.",
-        "Small, well-scoped learning tasks.",
+        "Clearly defined, small learning tasks.",
         "None.",
-        "Minimal; internal learning only.",
-        "Fixed-term trainee / placement roles with no independent delivery expectation."
+        "Minimal; internal learning and onboarding.",
+        "Interns / temporary roles building fundamental skills."
       ],
       [
         "IC1 – Entry-Level Professional",
         "Junior",
-        "Regular guidance; follows defined process.",
-        "Defined tasks within own area.",
+        "Regular guidance and support; follows defined process.",
+        "Well-defined tasks within own area.",
         "None.",
-        "Limited; supports others' deliverables.",
-        "Entry / junior roles (roughly 0–2 yrs) still learning the craft."
+        "Delivers on time and to quality; supports others' work.",
+        "Junior specialists building confidence in day-to-day delivery."
       ],
       [
         "IC2 – Established Professional",
         "Professional",
-        "Independent on standard work; escalates edge cases.",
-        "Owns own workload end to end; routine ambiguity.",
+        "Independent on standard work; collaborates on projects.",
+        "Moderately complex tasks; owns own workload end to end.",
         "None (may guide interns).",
-        "Delivers own contribution reliably.",
-        "Fully-ramped individual contributors doing core role work."
+        "Reliably meets quality and productivity expectations.",
+        "Fully-ramped specialists delivering standard work independently."
       ],
       [
         "IC3 – Experienced Professional",
         "Senior",
-        "Self-directed on complex / ambiguous work.",
-        "Projects and team-level outcomes; sets the approach.",
-        "Informal mentoring; no direct reports.",
-        "Influences team priorities; trusted on judgement.",
-        "Senior ICs who own hard problems and uplift peers."
+        "Self-directed on complex or non-standard work.",
+        "Complex tasks or workstreams; improves processes.",
+        "Mentors less-experienced colleagues; no direct reports.",
+        "Trusted on judgement; influences how work is done.",
+        "Senior professionals owning hard problems and uplifting peers."
       ],
       [
         "IC4 – Subject Matter Expert",
         "Lead / Staff",
-        "Sets standards within a domain.",
-        "Cross-team impact within a domain.",
-        "Informal supervision — work distribution, guidance and input to evaluations; no direct reports.",
-        "Shapes decisions in area of expertise.",
-        "Deep experts who also informally supervise (distribute work, evaluate) without formal reports."
+        "Sets standards and best practices within a domain.",
+        "Deep domain expertise with cross-team impact; key escalation point.",
+        "May informally coordinate others in their area; no formal line management.",
+        "Leads critical initiatives; influences decisions across teams or products.",
+        "Recognised internal experts / solutions architects with cross-team impact."
       ],
       [
         "IC5 – Master",
         "Principal",
-        "Defines the approach for a function or discipline.",
-        "Multi-team / function-wide; the hardest problems.",
-        "None formal; leads through influence.",
-        "Drives function-level outcomes and strategy input.",
-        "Principal-level ICs with function-wide impact."
+        "Owns a broad domain or platform area; defines the approach.",
+        "Designs and oversees complex solutions; drives major transformations.",
+        "Guides multiple teams or functions; no formal line management.",
+        "Strategic advisor to managers and Heads on high-impact decisions.",
+        "Principal-level experts owning a broad domain or platform."
       ],
       [
         "IC6 – Thought Leader",
         "Distinguished",
-        "Sets direction for the discipline at company level.",
-        "Company / industry scope.",
-        "None formal; organisation-wide and external influence.",
-        "Shapes company direction; external reputation.",
-        "Rare distinguished experts; company- and industry-level influence."
+        "Shapes long-term direction, architecture or methodology for their domain.",
+        "Company-wide / product-line-wide impact; leads cross-functional strategy and transformation.",
+        "Mentors and develops communities of practice; no formal line management.",
+        "Represents Sprintax externally — clients, industry bodies, regulators, conferences.",
+        "Rare, top-level company experts (Chief SME / Chief Architect), comparable to Senior Manager in scope."
       ],
       [
         "M1 – Team Leader",
         "Team Leader",
         "Leads a team within agreed goals; still hands-on.",
         "A team, from small up to large.",
-        "Coordinates and supports the team; first-line leadership.",
-        "Accountable for the team's delivery.",
+        "Plans and allocates work, coaches the team, manages performance and engagement; first-line leadership.",
+        "Accountable for the team's day-to-day delivery and objectives.",
         "First step into leadership — leading a team, from small up to large."
       ],
       [
@@ -486,56 +486,56 @@ const DATA = {
       [
         "M3 – Manager",
         "Manager",
-        "Formally manages a team; may set priorities across several teams.",
-        "A team; may span several teams.",
-        "Direct reports; hiring, performance, development. May lead managers and team leaders where scope requires.",
-        "Accountable for team outcomes.",
-        "Formal managers with full people-management authority; may lead several teams through others."
+        "Manages one or more teams or a functional area.",
+        "One or more teams, or a functional area.",
+        "Direct reports; hiring, performance, development. Leads team leaders, supervisors, senior specialists and other high-level ICs.",
+        "Accountable for operational delivery, resource planning and improvement initiatives.",
+        "Formal managers of one or more teams or a functional area."
       ],
       [
         "M4 – Senior Manager",
         "Senior Manager",
-        "Sets priorities across several teams.",
-        "Several teams.",
-        "Manages managers and team leaders.",
-        "Accountable for the combined teams' outcomes.",
-        "Senior managers running several teams through others."
+        "Leads a larger team, sub-department or region; defines mid-term objectives.",
+        "A larger team, sub-department or region.",
+        "Manages multiple team leaders; drives change and cross-functional collaboration.",
+        "Contributes to functional strategy and budgeting.",
+        "Senior managers running a sub-department or region through multiple team leaders."
       ],
       [
         "D5 – Head of Department",
         "Head of Dept",
-        "Owns a department; sets its plan and priorities.",
-        "A whole department.",
-        "Leads managers and senior managers.",
-        "Accountable for department outcomes and resourcing.",
-        "Heads of department owning a whole department."
+        "Overall leader of a department, region or business unit; sets and executes functional strategy.",
+        "A whole department, region or business unit.",
+        "Builds leadership capability in the area; part of the extended senior leadership group.",
+        "Owns budgets and key results.",
+        "Heads owning a department, region or business unit."
       ],
       [
         "D6 – Director",
         "Director",
-        "Sets function strategy within company goals.",
-        "A whole function (Operations, Tech, Marketing, Commercial).",
-        "Leads a leadership team of department heads.",
-        "Accountable for the function's results and plan.",
-        "Directors owning an entire function."
+        "Executive owner of a major function or business line; sets long-term direction.",
+        "A major function or business line.",
+        "Leads a leadership team; active member of the senior leadership team.",
+        "Ensures delivery of strategic objectives; steers investment and organisation design.",
+        "Directors owning an entire function or business line."
       ],
       [
         "EX – Executive",
         "Executive (VP)",
-        "Translates company strategy into cross-function direction.",
-        "Several functions / a division.",
-        "Leads directors.",
-        "Owns division outcomes / major P&L.",
-        "Executives leading several functions across the company."
+        "Shapes overall corporate direction; makes enterprise-level decisions.",
+        "Company-wide; accountable for the strategy and performance of their function.",
+        "Leads directors and their functions.",
+        "Accountable to the CEO and/or Board.",
+        "C-level executives owning a function company-wide."
       ],
       [
         "CEO – Chief Executive",
         "CEO",
-        "Sets company strategy.",
-        "Company-wide.",
+        "Holds ultimate responsibility for vision, strategy, culture and performance.",
+        "The whole organisation.",
         "Leads the executive team.",
-        "Accountable for company performance.",
-        "The CEO."
+        "Represents the company to the Board, shareholders and external stakeholders; steers long-term sustainable growth.",
+        "The CEO / President."
       ]
     ]
   }
